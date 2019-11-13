@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% include head.html %}
+
+<body>
+
+  <ul class="skip-main">
+    <li><a href="#main-content">Skip to Main Content</a></li>
+  </ul>
+
+  {% unless page.bloglike %}
+    {% asset railway.png alt="" class="railway bg" %}
+    {% asset train.png alt="" id="object" class="bg" %}
+  {% endunless %}
+
+  {% include navbar.html %}
+
+  <main role="main" id="main-content" tabindex="-1">
+    <div class="{% if page.bloglike %}blog{% endif %}" id={{ page.nav }}>
+      {% if page.bloglike %}<h1><strong>{{page.title}}</strong></h1>{% endif %}
+      {{content}}
+    </div>
+  </main>
+
+  {% include footer.html %}
+
+  <!-- JavaScript assets -->
+  {% asset jquery-2.1.1.js %}
+  {% asset bootstrap.min.js %}
+
+  <!--tab script-->
+  <script>
+    $(document).ready(function() {
+      $(".btn-pref .btn").click(function () {
+        $(".btn-pref .btn").removeClass("btn-primary").addClass("btn-default");
+        // $(".tab").addClass("active"); // instead of this do the below
+        $(this).removeClass("btn-default").addClass("btn-primary");
+      });
+    });
+  </script>
+
+  {% unless page.bloglike %}
+    {% asset wow.js %}
+    <script>new WOW().init();</script>
+
+    <!--counter scripts-->
+    <script>
+      $('.counter-count').each(function () {
+        $(this).prop('Counter',0).animate({
+            Counter: $(this).text()
+        }, {
+            duration: 5000,
+            easing: 'swing',
+            step: function (now) {
+                $(this).text(Math.ceil(now));
+        }});
+      });
+    </script>
+
+    <!--train scripts-->
+    <script>
+      var window_width = $(window).height() - $('#object').width();
+      var document_height = $(document).height() - $(window).height();
+      $(function () {
+          $(window).scroll(function () {
+              var scroll_position = $(window).scrollTop();
+              var object_position_left = window_width * (scroll_position / document_height);
+              $('#object').css({
+                  'top': object_position_left,
+                  'transition': '0.6s'
+              });
+          });
+      });
+    </script>
+  {% endunless %}
+</body>
+</html>

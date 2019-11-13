@@ -1,0 +1,23 @@
+<head>
+  <meta charset="utf-8">
+
+  <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="{{ site.description }}">
+  <meta name="keywords" content="PyCon India, PyCon, Conference" />
+
+  <!-- Open Graph Meta -->
+
+  <meta property="og:title" content="{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}" />
+  <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}" />
+  <meta property="og:url" content="https://in.pycon.org/2019{{page.url}}" />
+  <meta property="og:image" itemprop="image" content="https://in.pycon.org/{% asset logo-small.png @path %}" />
+  <meta property="og:type" content="article" />
+
+  <link rel="shortcut icon" href="{% asset favicon.png @path %}">
+
+  {% asset bootstrap.min.css %}
+  {% asset styles.css %}
+  {% asset animate.css %}
+</head>
